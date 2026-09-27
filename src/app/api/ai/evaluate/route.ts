@@ -33,9 +33,18 @@ export async function POST(request: Request) {
       if (containsForbiddenLearningLabel([generated.feedback, generated.followUpQuestion, generated.possibleMisconception ?? ""])) {
         throw new Error("Generated feedback failed the child-safety content check.");
       }
+      if (generated.correctness !== deterministic.correctness) {
+        console.warn("Model evaluation disagreed with deterministic arithmetic; using fallback feedback.");
+        return NextResponse.json({
+          deterministic,
+          evaluation: fallbackResponseEvaluation(deterministic),
+          source: "fallback" as const,
+          notice: "Demo feedback used because the learning guide disagreed with the arithmetic check.",
+        });
+      }
       return NextResponse.json({
         deterministic,
-        evaluation: { ...generated, correctness: deterministic.correctness },
+        evaluation: generated,
         source: provider.source,
         notice: provider.source === "fallback" ? "Demo feedback used while the learning guide is unavailable." : undefined,
       });

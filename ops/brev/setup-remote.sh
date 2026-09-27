@@ -28,7 +28,7 @@ fi
 # shellcheck disable=SC1091
 source "${VENV}/bin/activate"
 python -m pip install --upgrade pip setuptools wheel
-python -m pip install vllm Pillow requests
+python -m pip install 'vllm==0.30.0' Pillow requests
 
 python - <<'PY'
 import sys

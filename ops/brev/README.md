@@ -21,14 +21,25 @@ brev refresh
 
 The scripts resolve the actual running A10G instance from `brev ls --json`; they do not assume whether its displayed name is `hinklab-vlm` or `thinklab-vlm`.
 
-## Start workflow
+## First-time or recovery setup
 
-After the Brev GPU is restarted:
+Run the install-capable setup only when the existing remote virtual environment is missing or needs recovery:
 
 ```bash
 brev refresh
 INSTANCE="$(./ops/brev/status.sh --name-only)"
 brev exec "$INSTANCE" @ops/brev/setup-remote.sh 2>&1 | tee ops/brev/logs/remote-setup.log
+```
+
+`setup-remote.sh` pins the verified `vllm==0.30.0` release. It does not install CUDA or create, delete, or recreate the Brev GPU environment.
+
+## Normal demo start
+
+After the Brev GPU is restarted, use the already-prepared remote environment:
+
+```bash
+brev refresh
+INSTANCE="$(./ops/brev/status.sh --name-only)"
 brev exec "$INSTANCE" @ops/brev/start-model.sh
 ./ops/brev/status.sh
 ./ops/brev/port-forward.sh
@@ -81,7 +92,6 @@ From WSL at the repository root:
 ```bash
 brev refresh
 INSTANCE="$(./ops/brev/status.sh --name-only)"
-brev exec "$INSTANCE" @ops/brev/setup-remote.sh 2>&1 | tee ops/brev/logs/remote-setup.log
 brev exec "$INSTANCE" @ops/brev/start-model.sh
 ./ops/brev/status.sh
 ./ops/brev/port-forward.sh
