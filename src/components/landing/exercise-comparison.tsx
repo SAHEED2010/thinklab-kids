@@ -128,7 +128,7 @@ export function ExerciseComparison() {
               <div className="rounded-xl bg-berry/5 p-4 border border-berry/20">
                 <div className="flex items-center gap-2 text-xs font-bold text-berry">
                   <MessageSquare className="size-4" aria-hidden="true" />
-                  <span>Observed Child Reasoning:</span>
+                  <span>Example Child Reasoning:</span>
                 </div>
                 <p className="mt-1.5 text-sm italic text-ink/85">
                   {scenarioState === "standard"

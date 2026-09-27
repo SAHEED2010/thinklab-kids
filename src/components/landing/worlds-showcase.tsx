@@ -21,6 +21,7 @@ interface WorldItem {
   name: string;
   category: string;
   status: ProductStatus;
+  sliceBadge?: string;
   description: string;
   thinkingPillars: string;
   icon: React.ComponentType<{ className?: string }>;
@@ -34,37 +35,40 @@ const worldsData: WorldItem[] = [
     id: "number-lab",
     name: "Number Lab",
     category: "Maths & Quantitative Reasoning",
-    status: "live",
+    status: "preview",
+    sliceBadge: "Zara Mission Functional",
     description: "Multi-digit arithmetic, real budgeting, estimation, and numerical relationships applied to everyday life.",
     thinkingPillars: "Quantitative estimation · Calculation fluency · Number sense",
     icon: Calculator,
     accentColor: "bg-leaf/30 border-leaf/40",
     href: "/learn/zara",
-    ctaText: "Try Zara's Math Mission",
+    ctaText: "Try Zara's Math Slice",
   },
   {
     id: "code-quest",
     name: "Code Quest",
     category: "Computational Thinking",
-    status: "live",
-    description: "Deterministic sequencing, logic debugging, loop recognition, and giving precise instructions to machines.",
-    thinkingPillars: "Algorithmic thinking · Sequence precision · Debugging",
+    status: "preview",
+    sliceBadge: "Tobi Game Functional",
+    description: "Step-by-step sequencing and logic fundamentals, teaching children to give clear instructions to machines.",
+    thinkingPillars: "Algorithmic thinking · Sequence precision · Step order",
     icon: Bot,
     accentColor: "bg-sky/50 border-sky-300",
     href: "/learn/tobi",
-    ctaText: "Play Tobi's Robot Grid",
+    ctaText: "Play Tobi's Sequencing Game",
   },
   {
     id: "life-missions",
     name: "Life Missions",
     category: "Real-World Decisions",
-    status: "live",
-    description: "Everyday African contexts: market trade-offs, transportation choices, household budgeting, and environmental stewardship.",
+    status: "preview",
+    sliceBadge: "Zara Mission Functional",
+    description: "Everyday African contexts: market trade-offs, transportation choices, household budgeting, and everyday planning.",
     thinkingPillars: "Constraint reasoning · Trade-off analysis · Decision-making",
     icon: Store,
     accentColor: "bg-mango/40 border-mango/60",
     href: "/learn/zara",
-    ctaText: "Enter Balogun Market",
+    ctaText: "Try Zara's Market Slice",
   },
   {
     id: "strategy-arena",
@@ -151,7 +155,7 @@ export function WorldsShowcase() {
             10 purpose-built arenas for deliberate practice.
           </h2>
           <p className="mt-3 text-base sm:text-lg text-ink/75 leading-relaxed">
-            In ThinkLab, capabilities are not abstract drills—they exist within rich, culturally respectful worlds. We are completely transparent about what is live in today&apos;s build versus what is in preview.
+            In ThinkLab, capabilities are not abstract drills—they exist within rich, culturally respectful worlds. The broader worlds are preview architectures, with specific functional slices testable today through Zara and Tobi.
           </p>
         </div>
 
@@ -169,7 +173,6 @@ export function WorldsShowcase() {
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {worldsData.map((world) => {
           const Icon = world.icon;
-          const isLive = world.status === "live";
 
           return (
             <div
@@ -181,7 +184,14 @@ export function WorldsShowcase() {
                   <div className="rounded-2xl bg-white p-3 shadow-2xs border border-ink/10">
                     <Icon className="size-6 text-ink" />
                   </div>
-                  <StatusBadge status={world.status} size="sm" />
+                  <div className="flex flex-col items-end gap-1">
+                    <StatusBadge status={world.status} size="sm" />
+                    {world.sliceBadge && (
+                      <span className="rounded-full bg-emerald-100 border border-emerald-300 px-2 py-0.5 text-[10px] font-bold text-emerald-900">
+                        {world.sliceBadge}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <div className="mt-5">
@@ -199,12 +209,12 @@ export function WorldsShowcase() {
                   Focus: {world.thinkingPillars}
                 </p>
 
-                {isLive && world.href ? (
+                {world.href ? (
                   <Link
                     href={world.href}
                     className="mt-4 flex items-center justify-between rounded-xl bg-ink px-4 py-2.5 text-xs font-bold text-white hover:bg-berry transition focus-visible:outline focus-visible:outline-4 focus-visible:outline-berry"
                   >
-                    <span>{world.ctaText ?? "Launch Live Mission"}</span>
+                    <span>{world.ctaText ?? "Explore Slice"}</span>
                     <ArrowRight className="size-3.5" aria-hidden="true" />
                   </Link>
                 ) : (

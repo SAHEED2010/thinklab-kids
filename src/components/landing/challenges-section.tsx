@@ -14,7 +14,7 @@ export function ChallengesSection() {
             Puzzles and challenges: mental training grounds, not just entertainment.
           </h2>
           <p className="mt-4 text-base sm:text-lg leading-relaxed text-ink/75">
-            In ThinkLab, chess, X-and-O, word puzzles, and robot routes are not frivolous time-wasters. They are controlled sandboxes where children learn to anticipate consequences, test hypotheses, and debug their own errors.
+            In ThinkLab, chess, X-and-O, word puzzles, and sequencing games are not frivolous time-wasters. They are controlled sandboxes where children learn to anticipate consequences, test hypotheses, and debug their own errors.
           </p>
         </div>
 
@@ -74,7 +74,7 @@ export function ChallengesSection() {
                 How ThinkLab evaluates challenges: We reward depth, not fast clicking.
               </h3>
               <p className="mt-1 text-xs sm:text-sm text-ink/75 max-w-2xl leading-relaxed">
-                Standard EdTech leaderboards reward who mashes buttons fastest. ThinkLab recognises what matters:
+                Conventional competitive games often reward response speed alone. ThinkLab recognizes other vital dimensions:
               </p>
             </div>
           </div>

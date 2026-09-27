@@ -1,5 +1,5 @@
 import React from "react";
-import { ShieldAlert, CheckCircle2, HeartHandshake } from "lucide-react";
+import { ShieldAlert, CheckCircle2, HeartHandshake, Eye } from "lucide-react";
 import { StatusBadge } from "@/components/status-badge";
 
 export function ParentEvidencePreview() {
@@ -11,13 +11,13 @@ export function ParentEvidencePreview() {
             <HeartHandshake className="size-3.5" aria-hidden="true" />
             Parent & Guardian Value
           </p>
-          <StatusBadge status="live" size="sm" />
+          <StatusBadge status="preview" size="sm" />
         </div>
         <h2 id="parent-heading" className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl text-ink">
           Observable learning evidence, not hollow percentage scores.
         </h2>
         <p className="mt-4 text-base sm:text-lg leading-relaxed text-ink/75">
-          A report card that says &ldquo;Maths: 82%&rdquo; tells you almost nothing about how your child actually thinks. ThinkLab gives parents specific, observable activity evidence without unfair labels or fake IQ metrics.
+          A report card that says &ldquo;Maths: 82%&rdquo; tells you almost nothing about how your child actually thinks. Below is a synthetic specimen demonstrating the kind of observable activity evidence ThinkLab is designed to capture, without labels or fake IQ metrics.
         </p>
       </div>
 
@@ -58,20 +58,21 @@ export function ParentEvidencePreview() {
           </div>
         </div>
 
-        {/* Right: ThinkLab Observable Learning Evidence Card */}
+        {/* Right: ThinkLab Observable Learning Evidence Card (Synthetic Specimen) */}
         <div className="flex flex-col justify-between rounded-3xl border-2 border-berry/30 bg-gradient-to-b from-white via-sky/10 to-paper p-6 sm:p-8 shadow-soft">
           <div>
             <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-ink/10">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-berry">
-                  Synthetic Parent Preview · Observable Evidence
+                <span className="text-xs font-bold uppercase tracking-wider text-berry flex items-center gap-1.5">
+                  <Eye className="size-3.5" aria-hidden="true" />
+                  Synthetic Specimen · Demonstration Preview
                 </span>
                 <h3 className="mt-1 font-display text-2xl font-bold text-ink">
-                  Zara&apos;s Balogun Market Session (Age 7)
+                  Zara&apos;s Market Budget Session (Age 7)
                 </h3>
               </div>
-              <span className="rounded-full bg-emerald-100 border border-emerald-300 px-3 py-1 text-xs font-bold text-emerald-900">
-                Observed in Active Mission
+              <span className="rounded-full bg-sky border border-sky-300 px-3 py-1 text-xs font-bold text-ink">
+                Illustrative Preview
               </span>
             </div>
 
@@ -91,14 +92,14 @@ export function ParentEvidencePreview() {
 
             <div className="mt-4 space-y-3">
               <div className="rounded-2xl border border-ink/10 bg-white p-4 shadow-2xs">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Demonstrated Reasoning</span>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Observed Reasoning Example</span>
                 <p className="mt-1 text-sm leading-relaxed text-ink/85">
                   &ldquo;When tomato prices surged by ₦150, Zara compared two distinct alternative items before making her decision rather than abandoning the budget.&rdquo;
                 </p>
               </div>
 
               <div className="rounded-2xl border border-ink/10 bg-white p-4 shadow-2xs">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700">Articulated Explanation</span>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700">Articulated Explanation Example</span>
                 <p className="mt-1 text-sm leading-relaxed text-ink/85">
                   &ldquo;She initially needed help explaining why she subtracted the total cost from her budget. With a guided prompt, she stated: &lsquo;I must keep ₦200 safe for bus fare so I do not walk in the sun.&rsquo;&rdquo;
                 </p>
@@ -110,7 +111,7 @@ export function ParentEvidencePreview() {
                   Practise finding multiple valid item combinations within a fixed budget boundary.
                 </p>
                 <p className="mt-0.5 text-xs text-ink/75">
-                  Next step in Number Lab: explore combinations with ₦3,000 allowance and 4 items.
+                  Targeted next mission: explore combinations with ₦3,000 allowance and 4 items.
                 </p>
               </div>
             </div>
@@ -120,7 +121,7 @@ export function ParentEvidencePreview() {
           <div className="mt-6 border-t border-ink/10 pt-4 flex items-center justify-between gap-3 text-xs text-ink/70">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="size-4 text-emerald-600 shrink-0" aria-hidden="true" />
-              <span><strong>Our Ethical AI Commitment:</strong> No IQ scores, no &ldquo;gifted&rdquo; or &ldquo;weak&rdquo; labels, and no permanent ability pigeonholing. Evidence is always time-bounded and specific.</span>
+              <span><strong>Our Ethical AI Commitment:</strong> No IQ scores, no &ldquo;gifted&rdquo; or &ldquo;weak&rdquo; labels, and no permanent ability classifications. Observations are contextual, time-bounded, and specific.</span>
             </div>
           </div>
         </div>

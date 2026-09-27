@@ -29,43 +29,36 @@ export function StatusMatrix() {
             </div>
 
             <p className="mt-4 text-xs font-bold uppercase tracking-wider text-emerald-900">
-              Interactive & Testable Today
+              Operational in Current Code
             </p>
 
             <ul className="mt-4 space-y-3 text-sm text-ink/85">
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
-                  <strong className="text-ink">Zara Market / Life Mission:</strong>
-                  <p className="text-xs text-ink/70 mt-0.5">Adaptive shopping dilemma, server-side AI evaluation & explanation feedback.</p>
+                  <strong className="text-ink">Zara Adaptive Mission Generation:</strong>
+                  <p className="text-xs text-ink/70 mt-0.5">Server-side Gemini provider creates structured, age-appropriate market dilemmas with validated schemas.</p>
                 </div>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
-                  <strong className="text-ink">Tobi Robot Coding Logic:</strong>
-                  <p className="text-xs text-ink/70 mt-0.5">Deterministic grid sequencing, obstacle navigation, and execution runner.</p>
+                  <strong className="text-ink">Tobi Robot Sequencing:</strong>
+                  <p className="text-xs text-ink/70 mt-0.5">Deterministic instruction sequencing game where normal code validates instructions to reach the star without AI hallucinations.</p>
                 </div>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
-                  <strong className="text-ink">Learning Evidence Logging:</strong>
-                  <p className="text-xs text-ink/70 mt-0.5">Real-time session capture of strategies, reasoning, and child explanations.</p>
+                  <strong className="text-ink">Synthetic Learner Profiles:</strong>
+                  <p className="text-xs text-ink/70 mt-0.5">5 local mock profiles (Ages 4–11) to test developmental interactions without collecting real children&apos;s data.</p>
                 </div>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
-                  <strong className="text-ink">Synthetic Parent Preview:</strong>
-                  <p className="text-xs text-ink/70 mt-0.5">Observable progress cards with ethical, non-stigmatizing observation language.</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
-                <div>
-                  <strong className="text-ink">Learner Journey Hub:</strong>
-                  <p className="text-xs text-ink/70 mt-0.5">5 distinct developmental profiles across ages 4–11 with safe local mock state.</p>
+                  <strong className="text-ink">Learner Hub Navigation:</strong>
+                  <p className="text-xs text-ink/70 mt-0.5">Mobile-first Next.js App Router experience with accessible touch targets across learners and worlds.</p>
                 </div>
               </li>
             </ul>
@@ -91,10 +84,24 @@ export function StatusMatrix() {
             </div>
 
             <p className="mt-4 text-xs font-bold uppercase tracking-wider text-berry">
-              Active Prototype Directions
+              Active Prototype & Specimen Previews
             </p>
 
             <ul className="mt-4 space-y-3 text-sm text-ink/85">
+              <li className="flex items-start gap-2.5">
+                <Eye className="size-4 text-berry shrink-0 mt-0.5" aria-hidden="true" />
+                <div>
+                  <strong className="text-ink">Synthetic Parent Preview:</strong>
+                  <p className="text-xs text-ink/70 mt-0.5">Static specimen demonstrating observable learning evidence rather than opaque percentage grades.</p>
+                </div>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Eye className="size-4 text-berry shrink-0 mt-0.5" aria-hidden="true" />
+                <div>
+                  <strong className="text-ink">Synthetic Learning Evidence Model:</strong>
+                  <p className="text-xs text-ink/70 mt-0.5">Documented architecture for capturing reasoning, strategy, and next steps without permanent ability labels.</p>
+                </div>
+              </li>
               <li className="flex items-start gap-2.5">
                 <Eye className="size-4 text-berry shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
@@ -106,7 +113,7 @@ export function StatusMatrix() {
                 <Eye className="size-4 text-berry shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
                   <strong className="text-ink">Word Arena & Story Studio:</strong>
-                  <p className="text-xs text-ink/70 mt-0.5">Scrabble-inspired tile mechanics and narrative comprehension challenges.</p>
+                  <p className="text-xs text-ink/70 mt-0.5">Scrabble-inspired tile mechanics and narrative comprehension concepts.</p>
                 </div>
               </li>
               <li className="flex items-start gap-2.5">
@@ -123,19 +130,12 @@ export function StatusMatrix() {
                   <p className="text-xs text-ink/70 mt-0.5">Extended independent project briefs, debate formats, and portfolio structures.</p>
                 </div>
               </li>
-              <li className="flex items-start gap-2.5">
-                <Eye className="size-4 text-berry shrink-0 mt-0.5" aria-hidden="true" />
-                <div>
-                  <strong className="text-ink">Challenge Arena & Daily Problems:</strong>
-                  <p className="text-xs text-ink/70 mt-0.5">Multi-criteria rubrics rewarding depth, creativity, and reasoning over speed.</p>
-                </div>
-              </li>
             </ul>
           </div>
 
           <div className="mt-6 pt-4 border-t border-sky-200">
             <span className="block text-center text-xs font-semibold text-ink/60">
-              Interactive demonstrations available in /learners
+              Concepts and mock demonstrations in /learners
             </span>
           </div>
         </div>
@@ -149,42 +149,42 @@ export function StatusMatrix() {
             </div>
 
             <p className="mt-4 text-xs font-bold uppercase tracking-wider text-stone-600">
-              Production Scaling & Infrastructure
+              Future Engineering Phases
             </p>
 
             <ul className="mt-4 space-y-3 text-sm text-ink/80">
               <li className="flex items-start gap-2.5">
                 <Clock className="size-4 text-stone-500 shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
-                  <strong className="text-ink">Real Multiplayer & Team Challenges:</strong>
-                  <p className="text-xs text-stone-600 mt-0.5">Synchronous peer collaboration and school-vs-school strategy leagues.</p>
+                  <strong className="text-ink">Collaborative Team Challenges:</strong>
+                  <p className="text-xs text-stone-600 mt-0.5">Peer collaboration and optional team problem-solving challenges.</p>
                 </div>
               </li>
               <li className="flex items-start gap-2.5">
                 <Clock className="size-4 text-stone-500 shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
-                  <strong className="text-ink">Child Accounts & Guardian Consent:</strong>
-                  <p className="text-xs text-stone-600 mt-0.5">GDPR/NDPR-compliant guardian governance, verified auth, and data privacy.</p>
+                  <strong className="text-ink">Guardian Controls & Production Accounts:</strong>
+                  <p className="text-xs text-stone-600 mt-0.5">Guardian governance, verified authentication, and strict privacy design required before production.</p>
                 </div>
               </li>
               <li className="flex items-start gap-2.5">
                 <Clock className="size-4 text-stone-500 shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
                   <strong className="text-ink">Voice & African Languages:</strong>
-                  <p className="text-xs text-stone-600 mt-0.5">Speech interaction in Yoruba, Hausa, Igbo, and Nigerian Pidgin for ages 4–5.</p>
+                  <p className="text-xs text-stone-600 mt-0.5">Speech interaction in Yoruba, Hausa, Igbo, and Nigerian Pidgin for early learners.</p>
                 </div>
               </li>
               <li className="flex items-start gap-2.5">
                 <Clock className="size-4 text-stone-500 shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
-                  <strong className="text-ink">Low-Bandwidth Offline Sync:</strong>
-                  <p className="text-xs text-stone-600 mt-0.5">Local SQLite caching for uninterrupted learning during power and network outages.</p>
+                  <strong className="text-ink">Offline & Low-Data Support:</strong>
+                  <p className="text-xs text-stone-600 mt-0.5">Local caching and bandwidth minimization for intermittent connectivity.</p>
                 </div>
               </li>
               <li className="flex items-start gap-2.5">
                 <Clock className="size-4 text-stone-500 shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
-                  <strong className="text-ink">Multimodal Sketch & Photo Analysis:</strong>
+                  <strong className="text-ink">Multimodal Sketch & Artifact Analysis:</strong>
                   <p className="text-xs text-stone-600 mt-0.5">Photographing paper drawings and physical builds to explain their design.</p>
                 </div>
               </li>

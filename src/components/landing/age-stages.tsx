@@ -46,8 +46,8 @@ const stages: Stage[] = [
     interactions: ["Real-world missions", "Sequence programming", "Guided explanations", "Numeracy in context", "Simple strategy", "Mistake debugging"],
     keyCapabilities: ["Multi-digit practical arithmetic", "Algorithmic sequencing", "Cause-and-effect reasoning", "Explaining tradeoffs verbally"],
     representativeMission: {
-      title: "Zara's Market Budget & Tobi's Delivery Bot",
-      description: "Navigate market price changes within a ₦2,000 allowance, then sequence a mini robot across an obstacle grid.",
+      title: "Zara's Market Budget & Tobi's Robot Sequencing",
+      description: "Navigate market price changes within a ₦2,000 allowance, then order instructions sequentially to guide Tobi's robot to the goal.",
     },
   },
   {

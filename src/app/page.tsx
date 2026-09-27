@@ -165,21 +165,21 @@ export default function HomePage() {
                 1. The Evidence-Backed Challenge
               </span>
               <h3 className="mt-2 font-display text-2xl font-bold text-ink">
-                Foundational learning needs urgent, enduring support.
+                Nigeria faces serious foundational-learning challenges.
               </h3>
               <p className="mt-4 text-sm sm:text-base leading-relaxed text-ink/80">
-                Across Nigeria and the continent, schools face real structural hurdles in numeracy and literacy foundations. Traditional assessments, constrained by large class sizes, often prioritize speed and memorized calculation over deep conceptual comprehension.
+                Building enduring literacy and numeracy foundations remains an urgent priority across Nigeria and the wider continent. Strengthening these basics requires sustained dedication, supportive families, and committed educators.
               </p>
               <div className="mt-6 rounded-2xl bg-paper p-4 border border-ink/10">
                 <p className="text-xs font-semibold text-ink/75 italic">
-                  &ldquo;A child may pass a paper exam by memorizing an algorithm, but hesitate when asked to apply that exact same arithmetic to make an everyday family market budget decision.&rdquo;
+                  Academic foundations are the necessary starting point. The opportunity is ensuring children also have space to connect those foundations to active reasoning and real-world application.
                 </p>
               </div>
             </div>
 
             <div className="mt-6 pt-4 border-t border-ink/10">
               <p className="text-[11px] text-ink/60 font-mono">
-                [Structure prepared for verified foundational-learning empirical data and sourced academic citations.]
+                [Structure ready for verified foundational-learning empirical data and sourced academic citations.]
               </p>
             </div>
           </div>
@@ -284,7 +284,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <p className="mt-4 text-sm text-ink/80 leading-relaxed">
-                  Join Zara at Balogun Market. Balance food costs, adapt to price shocks, and explain your choices to receive adaptive feedback.
+                  Generate a live, age-aware market dilemma for Zara. Practise balancing food costs, navigating trade-offs, and formulating reasoning.
                 </p>
               </div>
 
@@ -318,7 +318,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <p className="mt-4 text-sm text-ink/80 leading-relaxed">
-                  Program a mini delivery robot through a grid of obstacles. Step-by-step sequencing and deterministic logic.
+                  Help Tobi guide the robot to the star. A deterministic mini game where clear instruction order is checked directly in normal code.
                 </p>
               </div>
 
@@ -327,7 +327,7 @@ export default function HomePage() {
                   href="/learn/tobi"
                   className="flex items-center justify-between rounded-2xl bg-ink px-5 py-3 font-bold text-white hover:bg-berry transition focus-visible:outline focus-visible:outline-4 focus-visible:outline-berry"
                 >
-                  <span>Play Tobi&apos;s Robot Grid</span>
+                  <span>Play Tobi&apos;s Sequencing Game</span>
                   <ArrowRight className="size-4" aria-hidden="true" />
                 </Link>
               </div>
