@@ -19,7 +19,7 @@ Copy-Item .env.example .env.local
 npm run dev
 ~~~
 
-Set GEMINI_API_KEY in .env.local for the Zara mission path. Never commit that file.
+The default Zara path uses the local NVIDIA/Qwen endpoint configured in `.env.local`. Start the secure Brev tunnel first, then use `THINKLAB_AI_PROVIDER=qwen`. Set `THINKLAB_AI_PROVIDER=fallback` to rehearse the local judge-safe path, or configure `GEMINI_API_KEY` only when deliberately using the optional Gemini rollback. Never commit `.env.local`.
 
 ## Quality commands
 
@@ -36,7 +36,7 @@ Create a focused branch from the shared base, keep commits scoped, and open a PR
 
 ## Troubleshooting
 
-- Mission unavailable: check that .env.local exists, GEMINI_API_KEY is set, and the dev server was restarted after changing it.
+- Mission unavailable: check that `.env.local` exists, the Brev tunnel is running, `THINKLAB_AI_BASE_URL` points at its local `/v1` endpoint, and the dev server was restarted after changing environment variables. The app should still complete the journey through fallback if Qwen is unavailable.
 - Dependency mismatch: remove node_modules and reinstall only if the lockfile and local install are inconsistent; do not commit generated dependencies.
 - Type errors after route edits: run npm run typecheck and check App Router parameter types.
 - Styling looks absent: confirm Tailwind content paths include the changed file and restart the dev server.

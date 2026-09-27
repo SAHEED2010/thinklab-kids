@@ -9,6 +9,8 @@ import type {
   ValidatedLearningMission,
 } from "./schemas";
 
+export type LearningAIProviderSource = "qwen" | "gemini" | "fallback";
+
 export interface GenerateMissionInput extends MissionRequest {
   learner: Learner;
   adaptationReason?: "simplify" | "maintain" | "increase";
@@ -38,6 +40,7 @@ export interface SummarizeSessionInput {
 }
 
 export interface LearningAIProvider {
+  readonly source: LearningAIProviderSource;
   generateMission(input: GenerateMissionInput): Promise<ValidatedLearningMission>;
   evaluateResponse(input: EvaluateResponseInput): Promise<ResponseEvaluationResult>;
   evaluateReasoning(input: EvaluateReasoningInput): Promise<ReasoningEvaluationResult>;

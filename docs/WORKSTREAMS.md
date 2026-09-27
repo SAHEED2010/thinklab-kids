@@ -12,7 +12,7 @@ Own learner profiles, navigation, homepage, learner selection, and learning-worl
 
 ## 3. Market Mission
 
-Own Zara's mission flow, answer/follow-up states, and eventual evidence handoff. Consume the AI route contract; do not call Gemini from a component.
+Own Zara's mission flow, answer/follow-up states, and eventual evidence handoff. Consume the AI route contract; do not call a model provider from a component.
 
 ## 4. Logic Game
 

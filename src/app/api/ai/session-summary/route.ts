@@ -34,7 +34,11 @@ export async function POST(request: Request) {
       ])) {
         throw new Error("Generated session summary failed the child-safety content check.");
       }
-      return NextResponse.json({ summary, source: "gemini" as const });
+      return NextResponse.json({
+        summary,
+        source: provider.source,
+        notice: provider.source === "fallback" ? "Demo evidence used while the learning guide is unavailable." : undefined,
+      });
     } catch (error) {
       console.error("Session summary failed:", error instanceof Error ? error.message : "Unknown provider error");
       return NextResponse.json({
