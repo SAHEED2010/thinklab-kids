@@ -41,3 +41,4 @@ Create a focused branch from the shared base, keep commits scoped, and open a PR
 - Type errors after route edits: run npm run typecheck and check App Router parameter types.
 - Styling looks absent: confirm Tailwind content paths include the changed file and restart the dev server.
 - Build differs from dev: run npm run build locally before opening the PR.
+- Production builds use Webpack and one Next.js worker (`next.config.ts`) to keep the hackathon workspace reliable when disk or memory is constrained. Use `npm run build`; do not remove this setting without validating on the shared environment.
