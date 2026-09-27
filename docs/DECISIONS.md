@@ -2,13 +2,13 @@
 
 This is a lightweight decision log, not a formal ADR system.
 
-## Gemini is the primary AI provider
+## NVIDIA/Qwen is the hackathon primary AI provider
 
-Gemini is the hackathon provider because the first adaptive mission needs a working structured-generation path. Calls stay server-side.
+The existing NVIDIA Brev A10G environment runs Qwen through vLLM's OpenAI-compatible API. Calls stay server-side, use a timeout, and fall back to deterministic local behaviour when the endpoint is unavailable.
 
 ## Provider-agnostic boundary
 
-The app uses a LearningAIProvider interface so a future provider can be added without coupling UI components to Gemini.
+The app uses a LearningAIProvider interface so Qwen, Gemini rollback, and the local fallback can share the same UI/API contracts.
 
 ## Next.js full-stack approach
 

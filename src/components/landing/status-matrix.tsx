@@ -37,7 +37,7 @@ export function StatusMatrix() {
                 <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
                   <strong className="text-ink">Zara Adaptive Mission Generation:</strong>
-                  <p className="text-xs text-ink/70 mt-0.5">Server-side Gemini provider creates structured, age-appropriate market dilemmas with validated schemas.</p>
+                  <p className="text-xs text-ink/70 mt-0.5">A server-side learning provider creates structured, age-appropriate market dilemmas with validated schemas and a local fallback.</p>
                 </div>
               </li>
               <li className="flex items-start gap-2.5">

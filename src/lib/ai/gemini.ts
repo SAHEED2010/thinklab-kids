@@ -25,6 +25,8 @@ import { MISSION_SYSTEM_PROMPT, buildMissionPrompt } from "./prompts/mission";
 const GEMINI_MODEL = "gemini-2.5-flash";
 
 export class GeminiLearningAIProvider implements LearningAIProvider {
+  readonly source = "gemini" as const;
+
   private readonly client: GoogleGenAI;
 
   constructor(apiKey: string) {
@@ -154,12 +156,4 @@ export class GeminiLearningAIProvider implements LearningAIProvider {
 function requireText(response: { text?: string }): string {
   if (!response.text) throw new Error("Gemini returned an empty response.");
   return response.text;
-}
-
-export function createLearningAIProvider(): LearningAIProvider {
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) {
-    throw new Error("GEMINI_API_KEY is not configured. Add it to .env.local to use AI mission generation.");
-  }
-  return new GeminiLearningAIProvider(apiKey);
 }

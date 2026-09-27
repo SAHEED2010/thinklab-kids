@@ -12,7 +12,7 @@ import type {
 import { fallbackAdaptedMission, fallbackMarketMission, fallbackReasoningEvaluation, fallbackResponseEvaluation, fallbackSessionSummary } from "@/lib/learning/fallback";
 import { evaluateMissionAnswer } from "@/lib/learning/deterministic";
 
-type MissionSource = "gemini" | "fallback";
+type MissionSource = "qwen" | "gemini" | "fallback";
 type Phase = "start" | "answer" | "explain" | "adaptedAnswer" | "summary";
 
 const missionRequest = {
@@ -30,7 +30,7 @@ export function MissionDemo({ learner }: { learner: Learner }) {
   const [reasoningEvaluation, setReasoningEvaluation] = useState<ReasoningEvaluationResult | null>(null);
   const [summary, setSummary] = useState<SessionSummaryResult | null>(null);
   const [attempts, setAttempts] = useState<SessionAttempt[]>([]);
-  const [source, setSource] = useState<MissionSource>("gemini");
+  const [source, setSource] = useState<MissionSource>("qwen");
   const [notice, setNotice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -46,7 +46,7 @@ export function MissionDemo({ learner }: { learner: Learner }) {
     setReasoningEvaluation(null);
     setSummary(null);
     setAttempts([]);
-    setSource("gemini");
+    setSource("qwen");
     setNotice(null);
     setError(null);
   }
@@ -69,7 +69,7 @@ export function MissionDemo({ learner }: { learner: Learner }) {
     try {
       const payload = await requestJson<{ mission: ValidatedLearningMission }>("/api/ai/mission", { learnerId: learner.id, ...missionRequest });
       setMission(payload.mission);
-      setSource(payload.source ?? "gemini");
+      setSource(payload.source ?? "qwen");
       setNotice(payload.notice ?? null);
       setPhase("answer");
     } catch {

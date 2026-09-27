@@ -4,6 +4,7 @@ out/
 coverage/
 *.tsbuildinfo
 *.log
+ops/brev/logs/*.png
 .env
 .env.*
 !.env.example
