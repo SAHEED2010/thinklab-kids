@@ -6,6 +6,7 @@ import {
   ArrowRight,
   Volume2,
   CheckCircle2,
+  Circle,
 } from "lucide-react";
 import { ProductSubNav } from "@/components/product/product-sub-nav";
 import { StatusBadge } from "@/components/status-badge";
@@ -29,6 +30,7 @@ interface DevelopmentalStage {
   primaryInteractions: string[];
   keyCapabilities: string[];
   canonicalWorlds: string[];
+  functionalSlices?: { name: string; href: string }[];
   sampleExperience: {
     title: string;
     learner: string;
@@ -75,8 +77,8 @@ const developmentalStages: DevelopmentalStage[] = [
     range: "Ages 6–8",
     agencyMotto: "“I try and explain.”",
     title: "Stage 2: Applied Foundations & Deterministic Logic",
-    badge: "live",
-    statusText: "Functional Live Slice",
+    badge: "preview",
+    statusText: "Preview — Developmental Model",
     themeColor: "from-sky/30 via-white to-paper",
     borderAccent: "border-sky-400",
     summary:
@@ -84,7 +86,7 @@ const developmentalStages: DevelopmentalStage[] = [
     primaryInteractions: [
       "Real-world budgeting missions",
       "Ordered sequence programming",
-      "Verbal explanation capture",
+      "Written explanation capture",
       "Multi-digit arithmetic trade-offs",
       "Boundary collision debugging",
       "Simple defensive strategy",
@@ -96,6 +98,10 @@ const developmentalStages: DevelopmentalStage[] = [
       "Cognitive flexibility when constraints shift",
     ],
     canonicalWorlds: ["Life Missions", "Code Quest", "Number Lab"],
+    functionalSlices: [
+      { name: "Zara Market Mission", href: "/learn/zara" },
+      { name: "Tobi Code Quest", href: "/learn/tobi" },
+    ],
     sampleExperience: {
       title: "Balogun Market & Robot Star Navigation",
       learner: "Zara (Age 7) & Tobi (Age 6)",
@@ -301,6 +307,28 @@ export default function AgesPage() {
                     ))}
                   </div>
                 </div>
+
+                {/* Functional slices — show which parts are genuinely LIVE */}
+                {stage.functionalSlices && stage.functionalSlices.length > 0 && (
+                  <div className="mt-4 pt-3 border-t border-ink/10">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-800 block">
+                      Live Functional Slices
+                    </span>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {stage.functionalSlices.map((slice) => (
+                        <Link
+                          key={slice.name}
+                          href={slice.href}
+                          className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50/80 px-2.5 py-1 text-[11px] font-bold text-emerald-800 transition hover:bg-emerald-100"
+                        >
+                          <Circle className="size-1.5 fill-emerald-600 text-emerald-600 animate-pulse" aria-hidden="true" />
+                          <span>{slice.name}</span>
+                          <span className="text-emerald-600 font-black">LIVE</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 <div className="mt-4 pt-3 border-t border-ink/10">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-ink/50 block">

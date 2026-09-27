@@ -46,8 +46,8 @@ const loopStages = [
     num: "04",
     name: "Explain",
     color: "bg-leaf/40 text-ink border-leaf",
-    description: "Articulate why they chose that approach in their own spoken or written words.",
-    detail: "The cornerstone of ThinkLab: articulating reasoning solidifies comprehension and builds confidence to defend ideas.",
+    description: "Articulate why they chose that approach in their own written words.",
+    detail: "The cornerstone of ThinkLab: articulating reasoning in writing solidifies comprehension and builds confidence to defend ideas.",
   },
   {
     num: "05",
@@ -262,7 +262,7 @@ export default function HowItWorksPage() {
             ThinkLab Kids is deliberately <strong>not</strong> an open-ended conversational wrapper or a &ldquo;ChatGPT for kids&rdquo;. Handing young children an unfiltered chat interface is neither pedagogically effective nor safe.
           </p>
           <p>
-            Instead, we use Gemini behind strict server-side boundaries to generate structured, curriculum-aligned scenarios, introduce contextual plot twists, and synthesize session observations:
+            Instead, we use Gemini behind strict server-side boundaries to generate structured, age-appropriate scenarios aligned to the selected learning objective, introduce contextual plot twists, and synthesize session observations:
           </p>
         </div>
 
@@ -287,7 +287,7 @@ export default function HowItWorksPage() {
             <span className="text-xs font-bold uppercase tracking-wider text-berry">Evidence Synthesis</span>
             <h3 className="mt-1 text-base font-bold text-ink">Descriptive Observation</h3>
             <p className="mt-1 text-xs text-ink/70 leading-relaxed">
-              Summarizes observed decisions and spoken explanations into parent-friendly evidence without permanent IQ or talent labeling.
+              Summarizes observed decisions and learner explanations into parent-friendly evidence without permanent IQ or talent labeling.
             </p>
           </div>
         </div>
@@ -319,7 +319,7 @@ export default function HowItWorksPage() {
               <ul className="mt-2 space-y-1 text-xs text-ink/75">
                 <li>• Multimodal audio analysis for non-readers</li>
                 <li>• Multi-session longitudinal adaptive calibration</li>
-                <li>• Offline on-device small model execution for rural connectivity</li>
+                <li>• Offline and low-data support for intermittent connectivity</li>
                 <li>• Cross-world capability transfer tracking</li>
               </ul>
             </div>

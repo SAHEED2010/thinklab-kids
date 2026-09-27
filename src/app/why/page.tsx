@@ -139,7 +139,7 @@ export default function WhyPage() {
             Across Nigeria and the wider African continent, strengthening early literacy and basic numeracy remains one of the most critical developmental imperatives of our generation. However, addressing this challenge must never involve blaming dedicated teachers, under-resourced families, or children themselves.
           </p>
           <p className="font-medium text-ink">
-            ThinkLab rejects the harmful misconception that foundational practice and higher-order reasoning are in tension. They are mutually reinforcing: a child who understands <em>why</em> a calculation matters in the market or why an ordered sequence drives a robot learns the underlying arithmetic and logic with far greater retention and joy.
+            ThinkLab rejects the harmful misconception that foundational practice and higher-order reasoning are in tension. They are mutually reinforcing: connecting arithmetic to real decisions gives children repeated opportunities to practise transfer, reasoning, explanation, and application. A child who understands <em>why</em> a calculation matters in the market or why an ordered sequence drives a robot engages more deeply with the underlying arithmetic and logic.
           </p>
         </div>
 
