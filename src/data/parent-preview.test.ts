@@ -63,6 +63,25 @@ describe("syntheticParentEvidence", () => {
     }
   });
 
+  it("uses only canonical ThinkLab world names for suggested worlds", () => {
+    const canonicalWorlds = [
+      "Number Lab",
+      "Story Studio",
+      "Code Quest",
+      "Strategy Arena",
+      "Word Arena",
+      "Discovery Lab",
+      "Creator Studio",
+      "Life Missions",
+      "Wonder",
+      "Projects",
+    ];
+
+    for (const record of syntheticParentEvidence) {
+      expect(canonicalWorlds).toContain(record.nextRecommendedStep.suggestedWorld);
+    }
+  });
+
   it("has non-empty home conversation prompts and recent interests for every learner", () => {
     for (const record of syntheticParentEvidence) {
       expect(record.homeConversationPrompt.length).toBeGreaterThan(15);

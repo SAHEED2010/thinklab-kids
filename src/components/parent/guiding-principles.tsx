@@ -16,10 +16,10 @@ export function GuidingPrinciples() {
           id="principles-heading"
           className="mt-3 font-display text-2xl sm:text-3xl font-bold text-ink"
         >
-          Why we show observable evidence rather than single-number grades.
+          Adding observable evidence alongside conventional grades.
         </h2>
         <p className="mt-3 text-sm sm:text-base leading-relaxed text-ink/75">
-          Traditional report cards reduce an entire week of mental effort into a sterile number like &ldquo;Maths: 82%&rdquo;. That tells a parent nothing about whether their child guessed, froze under pressure, or developed a clever problem-solving approach.
+          Grades can help show syllabus attainment or performance. ThinkLab adds another layer: observable evidence about approach, reasoning, explanation, decisions, support needed, and next steps. While a score like &ldquo;Maths: 82%&rdquo; records an outcome, observable evidence illuminates how your child actually thought, what strategies they tested, and how to encourage their curiosity at home.
         </p>
       </div>
 

@@ -75,7 +75,7 @@ export const syntheticParentEvidence: ParentEvidenceRecord[] = [
     worldName: "Code Quest",
     sessionTime: "Today · Synthetic Demo Session",
     problemFaced:
-      "Navigating a robot around a boundary obstacle to reach the goal star using the fewest directional command cards.",
+      "Navigating a robot around obstacles on a 5×5 grid to reach the goal star using an ordered sequence of directional command cards.",
     academicFoundation: {
       concept: "Sequential Logic & Ordinal Step Ordering",
       details:
@@ -142,7 +142,7 @@ export const syntheticParentEvidence: ParentEvidenceRecord[] = [
     learnerFocus: "Early foundations",
     learnerColor: "mango",
     activityTitle: "Animal Tracks & Counting Parade",
-    worldName: "Early Foundations & Story Studio",
+    worldName: "Number Lab & Story Studio",
     sessionTime: "Yesterday · Synthetic Demo Session",
     problemFaced:
       "Matching animal calls to visual track cards by counting toe prints in sets of two and three rather than relying on color alone.",
@@ -163,7 +163,7 @@ export const syntheticParentEvidence: ParentEvidenceRecord[] = [
       action: "Pair spoken number words with physical household items",
       context:
         "Group everyday items like cups and fruit into sets of two, three, and four.",
-      suggestedWorld: "Early Foundations",
+      suggestedWorld: "Number Lab",
     },
     homeConversationPrompt:
       "Ask Amara: 'How many birds can you spot on the tree outside? Can we count their wings together?'",
@@ -177,7 +177,7 @@ export const syntheticParentEvidence: ParentEvidenceRecord[] = [
     learnerFocus: "Open-ended problem solving",
     learnerColor: "coral",
     activityTitle: "Community Solar Microgrid Allocation",
-    worldName: "Design Studio & Innovation Lab",
+    worldName: "Discovery Lab & Creator Studio",
     sessionTime: "2 days ago · Synthetic Demo Session",
     problemFaced:
       "Allocating limited battery capacity from a 500W community solar panel between clinic vaccine refrigeration, evening study lamps, and phone charging during an overcast day.",
@@ -198,7 +198,7 @@ export const syntheticParentEvidence: ParentEvidenceRecord[] = [
       action: "Model a rain-season energy conservation schedule with variable sunlight",
       context:
         "Design a conditional power-saving matrix for community water pumping and clinic lighting.",
-      suggestedWorld: "Design Studio",
+      suggestedWorld: "Creator Studio",
     },
     homeConversationPrompt:
       "Ask Favour: 'If our neighborhood had solar power during rainy season, which appliances would you turn on first and which would you wait to use?'",
