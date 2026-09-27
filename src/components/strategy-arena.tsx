@@ -1,159 +1,192 @@
 "use client";
 
 import { useState } from "react";
-import { RotateCcw, Sparkles, HelpCircle } from "lucide-react";
+import { ArrowRight, Lightbulb, RotateCcw, Sparkles } from "lucide-react";
+import { firstLetter, isCorrectChoice, lastLetter, WORD_CHAIN_PUZZLES, type WordChainPuzzle } from "@/lib/word-chain";
 
-// --- Game Constants ---
-interface Challenge {
-  question: string;
-  options: string[];
-  correctIndex: number;
-  category: string;
-  explanation: string;
-  hint: string;
+// After this many misses the chain links are highlighted automatically.
+const AUTO_CLUE_AFTER = 2;
+
+type ReflectionId = "last-letter" | "word-start" | "guess";
+
+const REFLECTIONS: { id: ReflectionId; label: string }[] = [
+  { id: "last-letter", label: "I looked at the last letter" },
+  { id: "word-start", label: "I checked how words start" },
+  { id: "guess", label: "I made a guess" },
+];
+
+function reflectionReply(id: ReflectionId, puzzle: WordChainPuzzle): string {
+  const last = puzzle.chain[puzzle.chain.length - 1];
+  const hook = lastLetter(last);
+  if (id === "last-letter") return `Yes! The last letter is the hook. ${last} ends with ${hook}, so the next word must start with ${hook}.`;
+  if (id === "word-start") return `Good checking. Every new word starts with the letter the word before it ends with.`;
+  return `A guess is a fine start. Next time, test it: ${last} ends with ${hook}, and ${puzzle.answer} starts with ${hook}.`;
 }
 
-const CHALLENGE: Challenge = {
-  question: "Which one does not belong with the others?",
-  options: ["Apple", "Banana", "Orange", "Car"],
-  correctIndex: 3,
-  category: "Fruits",
-  explanation: "Apples, Bananas, and Oranges are all delicious fruits. A car is something we use to travel!",
-  hint: "Think about what you can eat. Is there something here you can't eat?",
-};
-
-type GameStatus = 'playing' | 'feedback' | 'success';
+function ChainWord({ word, highlightFirst, highlightLast, tone = "plain" }: { word: string; highlightFirst: boolean; highlightLast: boolean; tone?: "plain" | "answer" }) {
+  const letters = word.split("");
+  return (
+    <span className={`inline-flex min-h-14 items-center rounded-2xl border-2 px-4 font-display text-2xl font-bold tracking-wide ${tone === "answer" ? "border-ink bg-leaf" : "border-ink/10 bg-white"}`}>
+      {letters.map((letter, i) => {
+        const marked = (highlightFirst && i === 0) || (highlightLast && i === letters.length - 1);
+        return (
+          <span key={i} className={marked ? "rounded-md bg-mango px-0.5" : undefined}>
+            {letter}
+          </span>
+        );
+      })}
+    </span>
+  );
+}
 
 export function StrategyArena() {
-  // --- State ---
-  const [status, setStatus] = useState<GameStatus>('playing');
-  const [selectedOption, setSelectedOption] = useState<number | null>(null);
-  const [showReflection, setShowReflection] = useState(false);
-  const [reflectionText, setReflectionText] = useState("");
+  const [puzzleIndex, setPuzzleIndex] = useState(0);
+  const [missed, setMissed] = useState<string[]>([]);
+  const [solved, setSolved] = useState(false);
+  const [clueAsked, setClueAsked] = useState(false);
+  const [reflection, setReflection] = useState<ReflectionId | null>(null);
 
-  // --- Game Logic ---
-  const handleChoice = (index: number) => {
-    if (status === 'success') return;
+  const puzzle = WORD_CHAIN_PUZZLES[puzzleIndex];
+  const lastWord = puzzle.chain[puzzle.chain.length - 1];
+  const latestMiss = missed.length > 0 ? puzzle.options.find((option) => option.word === missed[missed.length - 1]) : undefined;
+  const showLinks = solved || clueAsked || missed.length >= AUTO_CLUE_AFTER;
+  const isLastPuzzle = puzzleIndex === WORD_CHAIN_PUZZLES.length - 1;
 
-    setSelectedOption(index);
-    if (index === CHALLENGE.correctIndex) {
-      setStatus('success');
-    } else {
-      setStatus('feedback');
-    }
+  const choose = (word: string) => {
+    if (solved || missed.includes(word)) return;
+    if (isCorrectChoice(puzzle, word)) setSolved(true);
+    else setMissed((prev) => [...prev, word]);
   };
 
-  const resetGame = () => {
-    setStatus('playing');
-    setSelectedOption(null);
-    setShowReflection(false);
-    setReflectionText("");
+  const startPuzzle = (index: number) => {
+    setPuzzleIndex(index);
+    setMissed([]);
+    setSolved(false);
+    setClueAsked(false);
+    setReflection(null);
   };
+
+  const words = solved ? [...puzzle.chain, puzzle.answer] : puzzle.chain;
 
   return (
     <section className="rounded-3xl border border-ink/10 bg-white p-5 shadow-soft sm:p-8" aria-labelledby="strategy-heading">
       <div className="mb-8">
-        <p className="text-sm font-bold uppercase tracking-[0.18em] text-berry">Reasoning & Patterns</p>
-        <h2 id="strategy-heading" className="mt-1 font-display text-3xl font-bold">Strategy Arena</h2>
-        <p className="mt-2 leading-7 text-ink/70">Use your thinking powers to solve the challenge!</p>
+        <p className="text-sm font-bold uppercase tracking-[0.18em] text-berry">Words &amp; Patterns</p>
+        <h2 id="strategy-heading" className="mt-1 font-display text-3xl font-bold">Strategy &amp; Word Arena</h2>
+        <p className="mt-2 leading-7 text-ink/70">Each word hooks onto the one before it. Find the word that comes next.</p>
       </div>
 
-      <div className="flex flex-col gap-8">
-        {/* Challenge Area */}
-        <div className="rounded-3xl bg-paper p-6 border-2 border-ink/5">
-          <h3 className="text-xl font-display font-bold text-center mb-6">{CHALLENGE.question}</h3>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {CHALLENGE.options.map((option, idx) => (
-              <button
-                key={option}
-                onClick={() => handleChoice(idx)}
-                disabled={status === 'success'}
-                className={`min-h-16 rounded-2xl px-6 font-bold transition-all border-2 text-lg flex items-center justify-center ${
-                  selectedOption === idx
-                    ? (idx === CHALLENGE.correctIndex ? 'bg-leaf border-leaf text-white' : 'bg-coral/20 border-coral text-coral')
-                    : 'bg-white border-ink/10 text-ink hover:border-berry hover:bg-sky active:scale-95'
-                } disabled:opacity-60`}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Feedback Area */}
-        <div className="min-h-[100px]">
-          {status === 'feedback' && (
-            <div className="rounded-2xl bg-coral/10 p-5 border-l-4 border-coral animate-in fade-in slide-in-from-top-2">
-              <div className="flex items-start gap-3">
-                <HelpCircle className="text-coral shrink-0" size={24} />
-                <div>
-                  <p className="font-bold text-coral">Not quite yet!</p>
-                  <p className="mt-1 text-ink/70 leading-6">{CHALLENGE.hint}</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setSelectedOption(null)}
-                className="mt-4 text-sm font-bold text-berry hover:underline flex items-center gap-1"
-              >
-                <RotateCcw size={14} /> Try another choice
-              </button>
-            </div>
+      {/* Understand: the chain */}
+      <div className="rounded-3xl bg-sky p-5 sm:p-6">
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-ink/60">Word chain {puzzleIndex + 1} of {WORD_CHAIN_PUZZLES.length}</p>
+          {!showLinks && (
+            <button
+              onClick={() => setClueAsked(true)}
+              className="inline-flex min-h-12 items-center gap-2 rounded-full bg-white px-4 text-sm font-bold text-ink transition hover:bg-mango focus-visible:outline focus-visible:outline-4 focus-visible:outline-berry"
+            >
+              <Lightbulb aria-hidden="true" size={17} /> Clue
+            </button>
           )}
+        </div>
+        <ol className="mt-5 flex flex-wrap items-center gap-2" aria-label="Word chain">
+          {words.map((word, i) => (
+            <li key={word} className="flex items-center gap-2">
+              {i > 0 && <ArrowRight aria-hidden="true" size={20} className="text-ink/40" />}
+              <ChainWord
+                word={word}
+                highlightFirst={showLinks && i > 0}
+                highlightLast={showLinks && i < words.length - 1}
+                tone={solved && i === words.length - 1 ? "answer" : "plain"}
+              />
+            </li>
+          ))}
+          {!solved && (
+            <li className="flex items-center gap-2">
+              <ArrowRight aria-hidden="true" size={20} className="text-ink/40" />
+              <span className="inline-flex min-h-14 min-w-20 items-center justify-center rounded-2xl border-2 border-dashed border-ink/30 px-4 font-display text-2xl font-bold text-ink/40">?</span>
+            </li>
+          )}
+        </ol>
+        {showLinks && !solved && (
+          <p className="mt-4 leading-7 text-ink/80">See the yellow letters? Look at where each word ends and where the next one begins.</p>
+        )}
+      </div>
 
-          {status === 'success' && (
-            <div className="rounded-2xl bg-leaf/10 p-6 border-l-4 border-leaf animate-in fade-in zoom-in duration-300">
-              <div className="flex items-start gap-3">
-                <Sparkles className="text-leaf shrink-0" size={24} />
-                <div>
-                  <p className="font-bold text-leaf text-xl">You spotted the pattern!</p>
-                  <p className="mt-2 text-ink/80 leading-7">{CHALLENGE.explanation}</p>
-                  <p className="mt-3 font-bold text-berry">That&apos;s strong reasoning!</p>
-                </div>
+      {/* Think & choose */}
+      <fieldset className="mt-6" disabled={solved}>
+        <legend className="font-display text-xl font-bold">Which word comes after {lastWord}?</legend>
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {puzzle.options.map(({ word }) => {
+            const wasMissed = missed.includes(word);
+            const isAnswer = solved && word === puzzle.answer;
+            return (
+              <button
+                key={word}
+                onClick={() => choose(word)}
+                disabled={wasMissed}
+                className={`min-h-16 rounded-2xl border-2 px-4 font-display text-2xl font-bold transition focus-visible:outline focus-visible:outline-4 focus-visible:outline-berry ${
+                  isAnswer
+                    ? "border-ink bg-leaf text-ink"
+                    : wasMissed
+                      ? "border-ink/10 bg-ink/5 text-ink/40 line-through"
+                      : "border-ink/10 bg-white text-ink hover:border-berry hover:bg-sky active:scale-95 disabled:hover:border-ink/10 disabled:hover:bg-white"
+                }`}
+              >
+                {word}
+              </button>
+            );
+          })}
+        </div>
+      </fieldset>
+
+      {/* Feedback & learn */}
+      <div className="mt-6" aria-live="polite">
+        {!solved && latestMiss && (
+          <div className="rounded-2xl bg-coral/15 p-5">
+            <p className="font-bold">{latestMiss.word} doesn&apos;t fit. Think again!</p>
+            <p className="mt-2 leading-7 text-ink/80">{latestMiss.whyNot}</p>
+          </div>
+        )}
+
+        {solved && (
+          <div className="rounded-2xl bg-leaf/30 p-5 sm:p-6">
+            <div className="flex items-start gap-3">
+              <Sparkles aria-hidden="true" className="mt-1 shrink-0 text-berry" size={24} />
+              <div>
+                <p className="font-display text-2xl font-bold">You found the hook!</p>
+                <p className="mt-2 leading-7 text-ink/80">
+                  <span className="capitalize">{lastWord}</span> ends with <strong>{lastLetter(lastWord)}</strong>, and {puzzle.answer} starts with <strong>{firstLetter(puzzle.answer)}</strong>.
+                  You spotted the rule, then used it to test each word. That&apos;s pattern thinking.
+                </p>
               </div>
+            </div>
 
-              {/* Reflection Step */}
-              {!showReflection ? (
-                <div className="mt-6 pt-6 border-t border-leaf/20">
-                  <p className="text-sm font-bold text-ink/60 mb-3">What helped you decide?</p>
-                  <button
-                    onClick={() => setShowReflection(true)}
-                    className="min-h-12 rounded-full bg-berry px-6 font-bold text-white hover:bg-berry/90 transition-all active:scale-95"
-                  >
-                    I want to explain!
-                  </button>
+            {/* Explain */}
+            <div className="mt-6 border-t border-ink/10 pt-5">
+              <p className="font-bold">What helped you decide?</p>
+              {reflection === null ? (
+                <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+                  {REFLECTIONS.map(({ id, label }) => (
+                    <button
+                      key={id}
+                      onClick={() => setReflection(id)}
+                      className="min-h-12 rounded-full border-2 border-ink/10 bg-white px-5 text-left font-bold transition hover:border-berry focus-visible:outline focus-visible:outline-4 focus-visible:outline-berry"
+                    >
+                      {label}
+                    </button>
+                  ))}
                 </div>
               ) : (
-                <div className="mt-6 pt-6 border-t border-leaf/20">
-                  <textarea
-                    value={reflectionText}
-                    onChange={(e) => setReflectionText(e.target.value)}
-                    placeholder="Type your thinking here..."
-                    className="w-full rounded-2xl border-2 border-ink/10 p-4 text-ink focus:border-berry outline-none transition-all"
-                    rows={3}
-                  />
-                  <div className="mt-4 flex justify-end">
-                    <button
-                      onClick={resetGame}
-                      className="min-h-12 rounded-full bg-berry px-6 font-bold text-white hover:bg-berry/90 transition-all active:scale-95"
-                    >
-                      Done!
-                    </button>
-                  </div>
-                </div>
+                <p className="mt-2 leading-7 text-ink/80">{reflectionReply(reflection, puzzle)}</p>
               )}
             </div>
-          )}
-        </div>
 
-        {/* Global Reset */}
-        {status !== 'playing' && (
-          <div className="flex justify-center">
             <button
-              onClick={resetGame}
-              className="inline-flex items-center gap-2 rounded-full px-6 py-3 font-bold text-ink/40 hover:text-ink transition-colors"
+              onClick={() => startPuzzle(isLastPuzzle ? 0 : puzzleIndex + 1)}
+              className="mt-6 inline-flex min-h-12 items-center gap-2 rounded-full bg-berry px-6 font-bold text-white transition hover:bg-berry/90 focus-visible:outline focus-visible:outline-4 focus-visible:outline-ink active:scale-95"
             >
-              <RotateCcw size={16} /> Start Over
+              {isLastPuzzle ? <><RotateCcw aria-hidden="true" size={18} /> Play again</> : <>Next chain <ArrowRight aria-hidden="true" size={18} /></>}
             </button>
           </div>
         )}
