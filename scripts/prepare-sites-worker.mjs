@@ -48,10 +48,27 @@ function patchNextCloudflareRuntime(filePath) {
     "});var require_node_environment=",
     'var require_fast_set_immediate_external=__commonJS({"fast-set-immediate.external"(exports){}});',
   );
+  const nextServerStart = withoutFastImmediate.indexOf("var require_next_server=__commonJS({");
+  const nextServerEnd =
+    nextServerStart === -1
+      ? -1
+      : withoutFastImmediate.indexOf("});var import_next_server=", nextServerStart);
+  const nextServerSource =
+    nextServerStart === -1 || nextServerEnd === -1
+      ? withoutFastImmediate
+      : withoutFastImmediate.slice(nextServerStart, nextServerEnd);
+  const patchedNextServerSource = nextServerSource.replace(
+    'require("fs")),_path=require("path"),',
+    '{default:{existsSync:()=>false,readFileSync:()=>""}}),_path=path,',
+  );
+  const finalSource =
+    patchedNextServerSource === nextServerSource || nextServerStart === -1 || nextServerEnd === -1
+      ? withoutFastImmediate
+      : `${withoutFastImmediate.slice(0, nextServerStart)}${patchedNextServerSource}${withoutFastImmediate.slice(nextServerEnd)}`;
 
-  if (withoutFastImmediate === source) return false;
+  if (finalSource === source) return false;
 
-  writeFileSync(filePath, withoutFastImmediate);
+  writeFileSync(filePath, finalSource);
   return true;
 }
 
