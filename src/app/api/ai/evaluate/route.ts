@@ -36,7 +36,8 @@ export async function POST(request: Request) {
       return NextResponse.json({
         deterministic,
         evaluation: { ...generated, correctness: deterministic.correctness },
-        source: "gemini" as const,
+        source: provider.source,
+        notice: provider.source === "fallback" ? "Demo feedback used while the learning guide is unavailable." : undefined,
       });
     } catch (error) {
       console.error("Response evaluation failed:", error instanceof Error ? error.message : "Unknown provider error");
