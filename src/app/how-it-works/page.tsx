@@ -241,7 +241,7 @@ export default function HowItWorksPage() {
 
         {/* Prototype Honesty Notice */}
         <div className="mt-6 rounded-2xl bg-white/80 border border-leaf p-4 text-xs text-ink/80">
-          <strong>Transparency Note:</strong> Steps 1–6 are functional in the hackathon build via our server-side Gemini mission flow and deterministic validators. Steps 7–8 represent our validated product model and next integration phases.
+          <strong>Transparency Note:</strong> Steps 1–6 are functional in the hackathon build via our server-side learning-provider mission flow and deterministic validators. The current setup runs through Qwen, with Gemini available as an optional provider and a safe local fallback when no external model is reachable. Steps 7–8 represent our validated product model and next integration phases.
         </div>
       </section>
 
@@ -262,7 +262,7 @@ export default function HowItWorksPage() {
             ThinkLab Kids is deliberately <strong>not</strong> an open-ended conversational wrapper or a &ldquo;ChatGPT for kids&rdquo;. Handing young children an unfiltered chat interface is neither pedagogically effective nor safe.
           </p>
           <p>
-            Instead, we use Gemini behind strict server-side boundaries to generate structured, age-appropriate scenarios aligned to the selected learning objective, introduce contextual plot twists, and synthesize session observations:
+            Instead, ThinkLab uses a server-side learning-provider boundary to generate structured, age-appropriate scenarios aligned to the selected learning objective, introduce contextual plot twists, and synthesize session observations. The current hackathon setup runs through Qwen, with Gemini available as an optional provider and a safe local fallback when no external model is reachable:
           </p>
         </div>
 
@@ -304,7 +304,7 @@ export default function HowItWorksPage() {
                 Live in Current Build:
               </span>
               <ul className="mt-2 space-y-1 text-xs text-ink/75">
-                <li>• Server-side Gemini structured schema generation</li>
+                <li>• Server-side structured schema generation (Qwen primary, Gemini optional)</li>
                 <li>• Real-time input and output Zod validation</li>
                 <li>• Deterministic math and game fallback safety layers</li>
                 <li>• Structured mission response evaluation and session summaries</li>
