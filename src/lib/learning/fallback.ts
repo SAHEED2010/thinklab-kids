@@ -122,7 +122,7 @@ export function fallbackSessionSummary(
         : "Practised finding the amount left after buying items.",
     }],
     capabilityEvidence: [
-      ...(explained ? [{ capability: "Communication", observation: "Explained a step used during the market mission." }] : []),
+      ...(explained ? [{ capability: "Communication", observation: "Shared an explanation during the market mission." }] : []),
       { capability: "Reasoning", observation: "Worked through a budget question in a familiar market context." },
     ],
     nextStep: "Try finding two different shopping plans that stay inside a fixed budget.",

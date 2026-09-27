@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { evaluateMissionAnswer } from "./deterministic";
-import { fallbackMarketMission, fallbackReasoningEvaluation } from "./fallback";
+import { fallbackMarketMission, fallbackReasoningEvaluation, fallbackSessionSummary } from "./fallback";
 
 describe("fallback reasoning evaluation", () => {
   it("does not infer demonstrated understanding from explanation length", () => {
@@ -27,5 +27,20 @@ describe("fallback reasoning evaluation", () => {
     const reasoning = fallbackReasoningEvaluation(incorrect, "I tried subtracting the prices.");
 
     expect(reasoning.difficultyAction).toBe("simplify");
+  });
+});
+
+describe("fallback session summary", () => {
+  it("uses directly observable wording for a minimal explanation", () => {
+    const summary = fallbackSessionSummary("zara", "Zara's Market Adventure", [{ correctness: "correct", explanation: "ok" }]);
+
+    expect(summary.capabilityEvidence).toContainEqual({
+      capability: "Communication",
+      observation: "Shared an explanation during the market mission.",
+    });
+    expect(summary.capabilityEvidence).not.toContainEqual({
+      capability: "Communication",
+      observation: "Explained a step used during the market mission.",
+    });
   });
 });
