@@ -79,6 +79,13 @@ export default function HomePage() {
                   <span className="text-ink/40">→</span>
                   <span className="rounded-lg bg-ink text-white px-2.5 py-1">Master</span>
                 </div>
+                <div className="mt-3 pt-3 border-t border-berry/15 flex items-center justify-between text-xs">
+                  <span className="text-ink/70">8-stage iterative inquiry cycle</span>
+                  <Link href="/how-it-works" className="font-bold text-berry hover:underline flex items-center gap-1">
+                    <span>How the loop works in detail</span>
+                    <ArrowRight className="size-3" />
+                  </Link>
+                </div>
               </div>
 
               {/* Hero Action CTAs */}
@@ -91,7 +98,7 @@ export default function HomePage() {
                   <ArrowRight className="size-4" aria-hidden="true" />
                 </Link>
                 <Link
-                  href="#the-problem"
+                  href="/why"
                   className="inline-flex min-h-12 items-center rounded-full border-2 border-ink/15 px-6 py-3 font-bold text-ink transition hover:border-berry focus-visible:outline focus-visible:outline-4 focus-visible:outline-berry"
                 >
                   Why ThinkLab Exists
@@ -216,10 +223,14 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-berry/20">
+            <div className="mt-6 pt-4 border-t border-berry/20 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
               <p className="text-xs font-bold text-berry">
                 School gives the foundation. ThinkLab provides the arena to explore, apply, and explain it.
               </p>
+              <Link href="/why" className="inline-flex items-center gap-1 text-xs font-bold text-berry hover:underline shrink-0">
+                <span>Read our full thesis</span>
+                <ArrowRight className="size-3.5" />
+              </Link>
             </div>
           </div>
         </div>
@@ -381,20 +392,29 @@ export default function HomePage() {
       </section>
 
       {/* FOOTER: Responsible AI, Attribution, and Ethics */}
-      <footer className="border-t border-ink/10 bg-paper py-10 px-5">
-        <div className="mx-auto max-w-6xl flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-ink/70">
+      <footer className="border-t border-ink/10 bg-paper py-12 px-5">
+        <div className="mx-auto max-w-6xl flex flex-col md:flex-row items-start md:items-center justify-between gap-8 text-xs text-ink/70">
           <div>
             <p className="font-bold text-ink text-sm">ThinkLab Kids</p>
-            <p className="mt-1">
-              AI-assisted learning world for African children ages 4–14. Synthetic hackathon prototype.
+            <p className="mt-1 max-w-sm">
+              AI-assisted learning world for African children ages 4–14. Complements classroom foundations with contextual reasoning.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-4 font-semibold">
-            <Link href="/learners" className="hover:text-berry">Learners</Link>
-            <Link href="/worlds" className="hover:text-berry">Learning Worlds</Link>
-            <Link href="/parent" className="hover:text-berry">Parent Preview</Link>
-            <Link href="/learn/zara" className="hover:text-berry">Zara Mission (Live)</Link>
-            <Link href="/learn/tobi" className="hover:text-berry">Tobi Logic (Live)</Link>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 font-semibold">
+            <div className="flex flex-wrap items-center gap-4">
+              <span className="text-ink/40 uppercase tracking-wider text-[10px]">Product:</span>
+              <Link href="/why" className="hover:text-berry">Why ThinkLab</Link>
+              <Link href="/how-it-works" className="hover:text-berry">How It Works</Link>
+              <Link href="/ages" className="hover:text-berry">Ages 4–14</Link>
+            </div>
+            <div className="flex flex-wrap items-center gap-4 border-t sm:border-t-0 sm:border-l border-ink/10 pt-3 sm:pt-0 sm:pl-6">
+              <span className="text-ink/40 uppercase tracking-wider text-[10px]">Experiences:</span>
+              <Link href="/learners" className="hover:text-berry">Learners</Link>
+              <Link href="/worlds" className="hover:text-berry">Worlds</Link>
+              <Link href="/parent" className="hover:text-berry">Parent Preview</Link>
+              <Link href="/learn/zara" className="hover:text-berry">Zara (Live)</Link>
+              <Link href="/learn/tobi" className="hover:text-berry">Tobi (Live)</Link>
+            </div>
           </div>
         </div>
       </footer>
