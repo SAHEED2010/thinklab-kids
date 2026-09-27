@@ -42,10 +42,16 @@ function patchNextCloudflareRuntime(filePath) {
     "});var require_fast_set_immediate_external=",
     'var require_node_crypto=__commonJS({"node-crypto"(exports){}});',
   );
+  const withoutFastImmediate = patchBundledModule(
+    withoutNodeCrypto,
+    "var require_fast_set_immediate_external=__commonJS({",
+    "});var require_node_environment=",
+    'var require_fast_set_immediate_external=__commonJS({"fast-set-immediate.external"(exports){}});',
+  );
 
-  if (withoutNodeCrypto === source) return false;
+  if (withoutFastImmediate === source) return false;
 
-  writeFileSync(filePath, withoutNodeCrypto);
+  writeFileSync(filePath, withoutFastImmediate);
   return true;
 }
 
