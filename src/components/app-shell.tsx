@@ -21,13 +21,19 @@ export function AppShell({ children }: { children: ReactNode }) {
           </Link>
           <nav
             aria-label="Main navigation"
-            className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-semibold shrink-0"
+            className="flex min-w-0 max-w-[calc(100vw-7.5rem)] items-center gap-1 overflow-x-auto scrollbar-none text-xs font-semibold shrink-0 sm:max-w-none sm:gap-2 sm:overflow-visible sm:text-sm"
           >
             <Link
               className="rounded-full px-2 sm:px-3 py-1.5 sm:py-2 hover:bg-sky focus-visible:outline focus-visible:outline-4 focus-visible:outline-berry"
               href="/learners"
             >
               Learners
+            </Link>
+            <Link
+              className="rounded-full px-2 sm:px-3 py-1.5 sm:py-2 hover:bg-sky focus-visible:outline focus-visible:outline-4 focus-visible:outline-berry"
+              href="/demo"
+            >
+              Demo
             </Link>
             <Link
               className="flex items-center gap-1 sm:gap-1.5 rounded-full px-2 sm:px-3 py-1.5 sm:py-2 hover:bg-sky focus-visible:outline focus-visible:outline-4 focus-visible:outline-berry"

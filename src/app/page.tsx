@@ -91,7 +91,7 @@ export default function HomePage() {
               {/* Hero Action CTAs */}
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link
-                  href="#demo-experience"
+                  href="/demo"
                   className="inline-flex min-h-12 items-center gap-2.5 rounded-full bg-ink px-6 py-3 font-bold text-white shadow-soft transition hover:bg-berry focus-visible:outline focus-visible:outline-4 focus-visible:outline-berry"
                 >
                   <span>Enter the ThinkLab Demo</span>
