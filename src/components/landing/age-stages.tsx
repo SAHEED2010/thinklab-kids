@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Layers, Compass, Brain } from "lucide-react";
+import Link from "next/link";
+import { Layers, Compass, Brain, ArrowRight } from "lucide-react";
 
 interface Stage {
   id: string;
@@ -186,6 +187,18 @@ export function AgeStages() {
               {currentStage.representativeMission.description}
             </p>
           </div>
+        </div>
+
+        {/* Link to full ages page */}
+        <div className="mt-8 pt-6 border-t border-ink/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs">
+          <span className="text-ink/70 font-medium">Explore interactions, capabilities, and canonical worlds across all 4 stages.</span>
+          <Link
+            href="/ages"
+            className="inline-flex items-center gap-1.5 font-bold text-berry hover:underline shrink-0"
+          >
+            <span>View complete Ages 4–14 developmental deep dive</span>
+            <ArrowRight className="size-3.5" />
+          </Link>
         </div>
       </div>
     </section>
