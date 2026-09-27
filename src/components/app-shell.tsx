@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Compass, Sparkles, HeartHandshake } from "lucide-react";
+import { Compass, Sparkles, HeartHandshake, Backpack } from "lucide-react";
 import type { ReactNode } from "react";
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -52,6 +52,14 @@ export function AppShell({ children }: { children: ReactNode }) {
               <span>
                 <span className="hidden sm:inline">Parent </span>Preview
               </span>
+            </Link>
+            <Link
+              className="flex items-center gap-1 sm:gap-1.5 rounded-full bg-mango/70 px-2 sm:px-3 py-1.5 sm:py-2 font-bold hover:bg-mango focus-visible:outline focus-visible:outline-4 focus-visible:outline-berry"
+              href="/child"
+              aria-label="Enter child learning world"
+            >
+              <Backpack aria-hidden="true" className="size-3.5 sm:size-4 shrink-0" />
+              <span className="hidden min-[420px]:inline">Child space</span>
             </Link>
           </nav>
         </div>
