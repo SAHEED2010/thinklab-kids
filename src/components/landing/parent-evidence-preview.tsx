@@ -1,5 +1,6 @@
 import React from "react";
-import { ShieldAlert, CheckCircle2, HeartHandshake, Eye } from "lucide-react";
+import Link from "next/link";
+import { ShieldAlert, CheckCircle2, HeartHandshake, Eye, ArrowRight } from "lucide-react";
 import { StatusBadge } from "@/components/status-badge";
 
 export function ParentEvidencePreview() {
@@ -125,6 +126,17 @@ export function ParentEvidencePreview() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* CTA to Dedicated Parent Preview */}
+      <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
+        <Link
+          href="/parent"
+          className="inline-flex min-h-12 items-center gap-2.5 rounded-full bg-ink px-7 py-3 font-bold text-white shadow-soft transition hover:bg-berry focus-visible:outline focus-visible:outline-4 focus-visible:outline-berry"
+        >
+          <span>See Full Parent Preview</span>
+          <ArrowRight className="size-4" aria-hidden="true" />
+        </Link>
       </div>
     </section>
   );

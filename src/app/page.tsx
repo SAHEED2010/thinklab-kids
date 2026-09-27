@@ -392,6 +392,7 @@ export default function HomePage() {
           <div className="flex flex-wrap items-center gap-4 font-semibold">
             <Link href="/learners" className="hover:text-berry">Learners</Link>
             <Link href="/worlds" className="hover:text-berry">Learning Worlds</Link>
+            <Link href="/parent" className="hover:text-berry">Parent Preview</Link>
             <Link href="/learn/zara" className="hover:text-berry">Zara Mission (Live)</Link>
             <Link href="/learn/tobi" className="hover:text-berry">Tobi Logic (Live)</Link>
           </div>
