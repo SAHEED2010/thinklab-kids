@@ -11,6 +11,14 @@ describe("learningMissionSchema", () => {
       academicObjective: "addition and subtraction with money",
       capabilities: ["reasoning", "decision-making"],
       difficulty: 2,
+      challenge: {
+        budget: 2000,
+        items: [
+          { name: "Rice", price: 650 },
+          { name: "Eggs", price: 500 },
+        ],
+        selectedItemNames: ["Rice", "Eggs"],
+      },
     });
 
     expect(result.success).toBe(true);

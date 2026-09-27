@@ -2,7 +2,9 @@ import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 import { getLearner } from "@/data/learners";
 import { createLearningAIProvider } from "@/lib/ai";
-import { missionRequestSchema } from "@/lib/ai/schemas";
+import { learningMissionSchema, missionRequestSchema } from "@/lib/ai/schemas";
+import { containsForbiddenLearningLabel, missionTextForSafetyCheck } from "@/lib/ai/safety";
+import { fallbackMarketMission } from "@/lib/learning/fallback";
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -21,16 +23,25 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Learner not found." }, { status: 404 });
     }
 
-    const provider = createLearningAIProvider();
-    const mission = await provider.generateMission({ ...input, learner });
-
-    return NextResponse.json({ mission });
+    try {
+      const provider = createLearningAIProvider();
+      const mission = learningMissionSchema.parse(await provider.generateMission({ ...input, learner }));
+      if (containsForbiddenLearningLabel(missionTextForSafetyCheck(mission))) throw new Error("Generated mission failed the child-safety content check.");
+      return NextResponse.json({ mission, source: "gemini" as const });
+    } catch (error) {
+      console.error("Mission generation failed:", error instanceof Error ? error.message : "Unknown provider error");
+      return NextResponse.json({
+        mission: fallbackMarketMission,
+        source: "fallback" as const,
+        notice: "Demo mission used while the learning guide is unavailable.",
+      });
+    }
   } catch (error) {
     if (error instanceof ZodError) {
       return NextResponse.json({ error: "Mission request did not match the expected shape." }, { status: 400 });
     }
 
-    console.error("Mission generation failed:", error);
+    console.error("Mission request failed:", error instanceof Error ? error.message : "Unknown request error");
     return NextResponse.json(
       { error: "Mission generation is unavailable right now. Check the server configuration and try again." },
       { status: 503 },
