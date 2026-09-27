@@ -13,16 +13,33 @@ const projectRoot = process.cwd();
 const openNextRoot = path.join(projectRoot, ".open-next");
 const distRoot = path.join(projectRoot, "dist");
 
-function patchNextCloudflareRuntime(filePath) {
-  const source = readFileSync(filePath, "utf8");
-  const start = source.indexOf("var require_console_file=__commonJS({");
-  const endMarker = "});var require_work_unit_async_storage_instance=";
+function patchBundledModule(source, startMarker, endMarker, replacement) {
+  const start = source.indexOf(startMarker);
   const end = start === -1 ? -1 : source.indexOf(endMarker, start);
 
-  if (start === -1 || end === -1) return false;
+  if (start === -1 || end === -1) return source;
 
-  const replacement = 'var require_console_file=__commonJS({"console-file"(exports){}});';
-  writeFileSync(filePath, `${source.slice(0, start)}${replacement}${source.slice(end + 3)}`);
+  return `${source.slice(0, start)}${replacement}${source.slice(end + 3)}`;
+}
+
+function patchNextCloudflareRuntime(filePath) {
+  const source = readFileSync(filePath, "utf8");
+  const withoutConsoleFile = patchBundledModule(
+    source,
+    "var require_console_file=__commonJS({",
+    "});var require_work_unit_async_storage_instance=",
+    'var require_console_file=__commonJS({"console-file"(exports){}});',
+  );
+  const patchedSource = patchBundledModule(
+    withoutConsoleFile,
+    "var require_console_dim_external=__commonJS({",
+    "});var require_unhandled_rejection_external=",
+    'var require_console_dim_external=__commonJS({"console-dim.external"(exports){exports.setAbortedLogsStyle=()=>{}}});',
+  );
+
+  if (patchedSource === source) return false;
+
+  writeFileSync(filePath, patchedSource);
   return true;
 }
 
