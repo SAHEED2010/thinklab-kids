@@ -24,7 +24,7 @@ function patchBundledModule(source, startMarker, endMarker, replacement) {
 
 function patchNextCloudflareRuntime(filePath) {
   const source = readFileSync(filePath, "utf8");
-  const runtimeSource = `var __thinklab_fs={existsSync:()=>false,readFileSync:()=>"",writeFileSync:()=>{},appendFileSync:()=>{},mkdirSync:()=>{},readdirSync:()=>[],statSync:()=>({isFile:()=>false,isDirectory:()=>false}),promises:{readFile:async()=>new Uint8Array(),writeFile:async()=>{},mkdir:async()=>{}}};${source.replaceAll('require("fs")', "__thinklab_fs").replaceAll('require("path")', "path")}`;
+  const runtimeSource = `var __thinklab_fs={existsSync:()=>false,readFileSync:()=>"",writeFileSync:()=>{},appendFileSync:()=>{},mkdirSync:()=>{},readdirSync:()=>[],statSync:()=>({isFile:()=>false,isDirectory:()=>false}),promises:{readFile:async()=>new Uint8Array(),writeFile:async()=>{},mkdir:async()=>{}}};var __thinklab_os={platform:()=>"linux",tmpdir:()=>"/tmp",homedir:()=>"/",cpus:()=>[],arch:()=>"x64",release:()=>""};${source.replaceAll('require("fs")', "__thinklab_fs").replaceAll('require("path")', "path").replaceAll('require("os")', "__thinklab_os")}`;
   const withoutConsoleFile = patchBundledModule(
     runtimeSource,
     "var require_console_file=__commonJS({",
