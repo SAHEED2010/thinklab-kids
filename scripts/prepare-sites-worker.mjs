@@ -36,10 +36,16 @@ function patchNextCloudflareRuntime(filePath) {
     "});var require_unhandled_rejection_external=",
     'var require_console_dim_external=__commonJS({"console-dim.external"(exports){exports.setAbortedLogsStyle=()=>{}}});',
   );
+  const withoutNodeCrypto = patchBundledModule(
+    patchedSource,
+    "var require_node_crypto=__commonJS({",
+    "});var require_fast_set_immediate_external=",
+    'var require_node_crypto=__commonJS({"node-crypto"(exports){}});',
+  );
 
-  if (patchedSource === source) return false;
+  if (withoutNodeCrypto === source) return false;
 
-  writeFileSync(filePath, patchedSource);
+  writeFileSync(filePath, withoutNodeCrypto);
   return true;
 }
 
