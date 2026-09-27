@@ -48,6 +48,11 @@ export function LogicGame() {
     setCommandQueue((prev) => [...prev, cmd]);
   };
 
+  const removeCommand = (index: number) => {
+    if (gameStatus === 'running') return;
+    setCommandQueue((prev) => prev.filter((_, i) => i !== index));
+  };
+
   const resetGame = () => {
     setPosition(START_POSITION);
     setDirection('North');
@@ -205,11 +210,13 @@ export function LogicGame() {
                 commandQueue.map((cmd, idx) => (
                   <span
                     key={idx}
-                    className={`rounded-full px-3 py-2 text-sm font-bold transition-all border-2 ${
+                    onClick={() => removeCommand(idx)}
+                    className={`group relative cursor-pointer rounded-full px-3 py-2 text-sm font-bold transition-all border-2 ${
                       currentStep === idx ? 'bg-white border-berry scale-110 shadow-sm' : 'bg-white/60 border-transparent text-ink/70'
                     }`}
                   >
                     {idx + 1}. {cmd}
+                    <span className="absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity bg-coral text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px]">✕</span>
                   </span>
                 ))
               ) : (
@@ -239,6 +246,14 @@ export function LogicGame() {
               className="min-h-12 flex items-center justify-center gap-2 rounded-full bg-berry px-6 font-bold text-white transition-all hover:bg-berry/90 disabled:opacity-50 focus-visible:outline-4 focus-visible:outline-berry active:scale-95"
             >
               <Play size={18} fill="currentColor" /> Run
+            </button>
+
+            <button
+              onClick={() => removeCommand(commandQueue.length - 1)}
+              disabled={gameStatus === 'running' || commandQueue.length === 0}
+              className="min-h-12 flex items-center justify-center gap-2 rounded-full border-2 border-coral/30 bg-white px-6 font-bold text-coral transition-all hover:bg-coral/5 disabled:opacity-50 focus-visible:outline-4 focus-visible:outline-berry active:scale-95"
+            >
+              Undo
             </button>
 
             <button
