@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { calculateExpectedRemaining, determineDifficultyAction, evaluateMissionAnswer } from "./deterministic";
+import { calculateExpectedRemaining, calculateMissionTotal, determineDifficultyAction, evaluateMissionAnswer } from "./deterministic";
 import { fallbackMarketMission } from "./fallback";
 
 describe("deterministic market evaluation", () => {
@@ -18,5 +18,19 @@ describe("deterministic market evaluation", () => {
     expect(determineDifficultyAction(evaluation, "demonstrated")).toBe("increase");
     expect(determineDifficultyAction(evaluation, "developing")).toBe("maintain");
     expect(determineDifficultyAction({ ...evaluation, correctness: "incorrect" }, "emerging")).toBe("simplify");
+  });
+
+  it("rejects malformed challenges instead of silently scoring them", () => {
+    const malformedMission = {
+      ...fallbackMarketMission,
+      challenge: {
+        ...fallbackMarketMission.challenge,
+        selectedItemNames: ["Rice", "Missing item"],
+      },
+    };
+
+    expect(() => calculateMissionTotal(malformedMission)).toThrow();
+    expect(() => calculateExpectedRemaining(malformedMission)).toThrow();
+    expect(() => evaluateMissionAnswer(malformedMission, "500")).toThrow();
   });
 });

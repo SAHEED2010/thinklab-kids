@@ -17,6 +17,30 @@ export const missionChallengeSchema = z.object({
   budget: z.number().int().min(1).max(10000),
   items: z.array(missionItemSchema).min(2).max(5),
   selectedItemNames: z.array(z.string().trim().min(1).max(40)).min(1).max(5),
+}).superRefine((challenge, context) => {
+  const itemNames = challenge.items.map((item) => item.name);
+  const selectedNames = challenge.selectedItemNames;
+  const itemNameSet = new Set(itemNames);
+  const selectedNameSet = new Set(selectedNames);
+
+  if (itemNameSet.size !== itemNames.length) {
+    context.addIssue({ code: "custom", path: ["items"], message: "Item names must be unique." });
+  }
+  if (selectedNameSet.size !== selectedNames.length) {
+    context.addIssue({ code: "custom", path: ["selectedItemNames"], message: "Selected item names must be unique." });
+  }
+
+  const missingNames = selectedNames.filter((name) => !itemNameSet.has(name));
+  if (missingNames.length > 0) {
+    context.addIssue({ code: "custom", path: ["selectedItemNames"], message: "Every selected item must exist in items." });
+  }
+
+  const selectedTotal = challenge.items
+    .filter((item) => selectedNameSet.has(item.name))
+    .reduce((total, item) => total + item.price, 0);
+  if (selectedTotal > challenge.budget) {
+    context.addIssue({ code: "custom", path: ["budget"], message: "Selected items must fit within the budget." });
+  }
 });
 
 export const learningMissionSchema = z.object({

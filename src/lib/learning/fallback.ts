@@ -1,3 +1,4 @@
+import { determineDifficultyAction } from "./deterministic";
 import type { DifficultyAction, DeterministicEvaluation, LearningMission, ReasoningEvaluation, ResponseEvaluation, SessionSummary } from "@/lib/types";
 
 export const fallbackMarketMission: LearningMission = {
@@ -43,23 +44,19 @@ export function fallbackReasoningEvaluation(
   evaluation: DeterministicEvaluation,
   explanation: string,
 ): ReasoningEvaluation {
-  const hasUsefulDetail = explanation.trim().length >= 15;
-  const understanding = evaluation.correctness === "correct" && hasUsefulDetail
-    ? "demonstrated"
-    : evaluation.correctness === "correct"
-      ? "developing"
-      : "emerging";
+  const hasExplanation = explanation.trim().length > 0;
+  const understanding = evaluation.correctness === "correct" ? "developing" : "emerging";
 
   return {
     understanding,
-    feedback: understanding === "demonstrated"
-      ? "Your explanation showed the steps you used. Nice work making your thinking clear."
+    feedback: evaluation.correctness === "correct"
+      ? "Your answer matched the market calculation. Thanks for sharing your thinking."
       : "You have a useful start. Try naming the total cost before you subtract it from the budget.",
     possibleMisconception: understanding === "emerging" ? "The order of adding prices and subtracting from the budget may need another try." : null,
-    evidence: hasUsefulDetail
-      ? [{ capability: "Communication", observation: "Explained a step used to solve the market problem." }]
+    evidence: hasExplanation
+      ? [{ capability: "Communication", observation: "Shared an explanation during the market mission." }]
       : [],
-    difficultyAction: "maintain",
+    difficultyAction: determineDifficultyAction(evaluation, understanding),
   };
 }
 

@@ -1,6 +1,12 @@
+import { missionChallengeSchema } from "../ai/schemas";
 import type { DeterministicEvaluation, DifficultyAction, LearningMission, UnderstandingLevel } from "@/lib/types";
 
+export function validateMissionChallenge(mission: LearningMission): void {
+  missionChallengeSchema.parse(mission.challenge);
+}
+
 export function calculateMissionTotal(mission: LearningMission): number {
+  validateMissionChallenge(mission);
   const selected = new Set(mission.challenge.selectedItemNames);
   return mission.challenge.items
     .filter((item) => selected.has(item.name))
