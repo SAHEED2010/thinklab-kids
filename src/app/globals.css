@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --ink: #172338; --paper: #fffdf7; }
+* { box-sizing: border-box; }
+html, body { background: var(--paper); }
+body { margin: 0; color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+.font-display { font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; }
+::selection { background: #ffcb69; color: var(--ink); }
