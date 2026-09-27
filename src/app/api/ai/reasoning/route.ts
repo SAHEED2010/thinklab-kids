@@ -6,6 +6,7 @@ import { learningMissionSchema, reasoningEvaluationSchema, reasoningRequestSchem
 import { containsForbiddenLearningLabel, missionTextForSafetyCheck } from "@/lib/ai/safety";
 import { fallbackAdaptedMission, fallbackReasoningEvaluation } from "@/lib/learning/fallback";
 import { determineDifficultyAction, evaluateMissionAnswer } from "@/lib/learning/deterministic";
+import type { LearningAIProvider, LearningAIProviderSource } from "@/lib/ai/provider";
 
 function nextDifficulty(current: number, action: "simplify" | "maintain" | "increase"): number {
   if (action === "simplify") return Math.max(1, current - 1);
@@ -28,10 +29,11 @@ export async function POST(request: Request) {
 
     const deterministic = evaluateMissionAnswer(input.mission, input.answer);
     let evaluation = fallbackReasoningEvaluation(deterministic, input.explanation);
-    let source: "gemini" | "fallback" = "fallback";
+    let source: LearningAIProviderSource = "fallback";
+    let provider: LearningAIProvider | null = null;
 
     try {
-      const provider = createLearningAIProvider();
+      provider = createLearningAIProvider();
       const generated = reasoningEvaluationSchema.parse(await provider.evaluateReasoning({
         learner,
         mission: input.mission,
@@ -48,18 +50,18 @@ export async function POST(request: Request) {
         throw new Error("Generated reasoning feedback failed the child-safety content check.");
       }
       evaluation = generated;
-      source = "gemini";
+      source = provider.source;
     } catch (error) {
       console.error("Reasoning evaluation failed:", error instanceof Error ? error.message : "Unknown provider error");
+      provider = null;
     }
 
     const action = determineDifficultyAction(deterministic, evaluation.understanding);
     evaluation = { ...evaluation, difficultyAction: action };
     let adaptedMission = fallbackAdaptedMission(action);
 
-    if (source === "gemini") {
+    if (provider && source !== "fallback") {
       try {
-        const provider = createLearningAIProvider();
         const generatedMission = learningMissionSchema.parse(await provider.generateMission({
           learner,
           learnerId: input.learnerId,
@@ -77,6 +79,7 @@ export async function POST(request: Request) {
       } catch (error) {
         console.error("Adapted mission generation failed:", error instanceof Error ? error.message : "Unknown provider error");
         source = "fallback";
+        provider = null;
       }
     }
 

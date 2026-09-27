@@ -22,7 +22,7 @@ The foundation supports five fictional demo learners. Zara's adaptive market mis
 
 ## Tech stack
 
-Next.js, React, TypeScript, App Router, Tailwind CSS, ESLint, Vitest, Zod, Lucide React, and Gemini through @google/genai.
+Next.js, React, TypeScript, App Router, Tailwind CSS, ESLint, Vitest, Zod, Lucide React, and a swappable LearningAIProvider boundary. The hackathon primary is NVIDIA Brev + vLLM + Qwen; Gemini remains an optional rollback.
 
 ## Quick start
 
@@ -34,11 +34,11 @@ cp .env.example .env.local
 npm run dev
 ~~~
 
-On Windows PowerShell, use Copy-Item .env.example .env.local instead of cp. Add a Gemini key to .env.local before trying Zara's live mission.
+On Windows PowerShell, use Copy-Item .env.example .env.local instead of cp. For the live Zara path, start the secure NVIDIA Brev tunnel described in ops/brev/README.md. To rehearse without external AI, set THINKLAB_AI_PROVIDER=fallback.
 
 ## Environment variables
 
-GEMINI_API_KEY is server-only and must never be renamed to a NEXT_PUBLIC_* variable. .env.local is ignored by Git. See .env.example.
+THINKLAB_AI_BASE_URL, THINKLAB_AI_MODEL, and THINKLAB_AI_TOKEN are server-only configuration. Never rename provider credentials to NEXT_PUBLIC_* variables. .env.local is ignored by Git. See .env.example.
 
 ## Project structure
 
@@ -46,7 +46,7 @@ GEMINI_API_KEY is server-only and must never be renamed to a NEXT_PUBLIC_* varia
 src/app/              App Router pages and /api routes
 src/components/       Reusable UI and client interactions
 src/data/             Synthetic learner data
-src/lib/ai/            Provider boundary, Gemini adapter, schemas, prompts
+src/lib/ai/            Provider boundary, Qwen/Gemini/fallback adapters, schemas, prompts
 src/lib/types.ts       Shared domain types
 docs/                  Product and engineering context
 ~~~

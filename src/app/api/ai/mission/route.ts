@@ -27,7 +27,11 @@ export async function POST(request: Request) {
       const provider = createLearningAIProvider();
       const mission = learningMissionSchema.parse(await provider.generateMission({ ...input, learner }));
       if (containsForbiddenLearningLabel(missionTextForSafetyCheck(mission))) throw new Error("Generated mission failed the child-safety content check.");
-      return NextResponse.json({ mission, source: "gemini" as const });
+      return NextResponse.json({
+        mission,
+        source: provider.source,
+        notice: provider.source === "fallback" ? "Demo mission used while the learning guide is unavailable." : undefined,
+      });
     } catch (error) {
       console.error("Mission generation failed:", error instanceof Error ? error.message : "Unknown provider error");
       return NextResponse.json({
